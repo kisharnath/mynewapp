@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 import axios from 'axios'
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import Nav from './Nav';
-
+import '../index.css'
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -61,9 +61,13 @@ export default function CK() {
       console.log(editorRef.current.getContent());
     }
   };
+  
   const htmlContent = data;
   const replcedData =  htmlContent.replace('&nbsp;','&emsp;')
-  const pdfMakeContent = htmlToPdfmake(htmlContent);
+  //add line height 
+  const lastdata = `<div style='line-height:0.5px'>${replcedData} </div>`
+  const pdfMakeContent = htmlToPdfmake(lastdata);
+
   const generatePDF = async () => {
     
     const documentDefinition = {
@@ -85,20 +89,30 @@ export default function CK() {
   
    var conf =
     {
-      height: 500,
+      height: 600,
       menubar: false,
       forced_root_block:'p',
       plugins: [
         'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
         'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-        'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount','indent'
+        'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
       ],
       
       toolbar: 'undo redo | blocks | ' +
         'bold italic  | alignleft aligncenter ' +
-        'alignright alignjustify | bullist numlist outdent indent | ' ,
-      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-      
+        'alignright alignjustify | bullist numlist outdent indent | ' + 'lineheight' ,
+      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:24px,line-height:1px,color:white; }',
+      //change
+      lineheight_formats: "10pt 12pt 14pt 16pt",
+      style_formats: [
+        {
+          title: "Line height 18px",
+          inline: "p",
+          styles: {
+            "line-height": "4px"
+          }
+        }
+      ]
       
     }
   
@@ -120,7 +134,7 @@ export default function CK() {
           </Box>
           <button className='btn btn-primary' onClick={generateApplication}>Generate</button>
         </div>
-        <Editor className='mt-4'
+        <Editor className='mt-4 editor'
          
          apiKey='9v8us09pxz2l5kttnkz0wrdn1rq2903m9emcx2gsj85d7d26'
          onInit={(evt, editor) => editorRef.current = editor}
@@ -130,10 +144,11 @@ export default function CK() {
          
          value={data}
          init={conf}
+         
        />
         
         <button onClick={generatePDF} className='btn btn-primary mt-2 mb-3'>Download PDF</button>
-      <div className=''>To give indentaion type space</div>
+      <div className=''>To give indentation type space</div>
       <div className=''>Make neccessary changes</div>
       <p>Created by Kishar</p>
       </div>

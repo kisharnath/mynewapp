@@ -6,15 +6,15 @@ function Usage() {
       <Nav/>
       <div className="container text-center mt-5">
       <div class="alert alert-primary" role="alert">
-            Application writting
+            Application writing
 
         </div>
         <div class="alert alert-primary" role="alert">
-            Letter Writting
+            Letter writing
 
         </div>
         <div class="alert alert-primary" role="alert">
-            Essay writting
+            Essay writing
 
         </div>
       </div>
