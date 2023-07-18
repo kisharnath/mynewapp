@@ -20,6 +20,7 @@ export default function CK() {
   
 
   // generate applcation
+  console.log(process.env.REACT_APP_API_KEY)
   const api_key = process.env.REACT_APP_API_KEY
   function generateApplication() {
     const headers = {
