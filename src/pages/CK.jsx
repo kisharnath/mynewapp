@@ -65,7 +65,7 @@ export default function CK() {
   const htmlContent = data;
   const replcedData =  htmlContent.replace('&nbsp;','&emsp;')
   //add line height 
-  const lastdata = `<div style='line-height:0.5px'>${replcedData} </div>`
+  const lastdata = `<div style='line-height:1px'>${replcedData} </div>`
   const pdfMakeContent = htmlToPdfmake(lastdata);
 
   const generatePDF = async () => {
